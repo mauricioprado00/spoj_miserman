@@ -1,0 +1,31 @@
+#include <cstdio>
+#include <stdlib.h>
+
+int main() {
+	int N, M;//N = number jumps, M = number of buses
+	scanf("%d %d", &N, &M);
+	int spent = 0, lasti = -1, lastv = 200;
+	int min, diff, i, j, current;
+	for (j = 0; j < N; j++) {
+		min = 101;
+		lasti = M - 1;
+		for (i = 0; i < M; i++) {
+			if (i == lasti) continue;
+
+			scanf("%d", &current);
+			if ((current - min) < 0) {
+				if (abs(lastv - current) > 1) {
+					lasti = i;
+					min = current;
+					if (current == 1) {
+printf("broken\n");
+						break;
+					}
+				}
+			}
+		}
+		lastv = min;
+		spent += lastv;
+		printf("%d>", lastv);
+	}
+}
